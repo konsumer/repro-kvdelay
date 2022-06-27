@@ -1,0 +1,21 @@
+name = "template-vite-cf"
+account_id = "cd9c418c2f482d1d4b6616d040bd48e5"
+type = "javascript"
+workers_dev = true
+compatibility_date = "2022-04-15"
+
+[site]
+bucket = "./dist"
+
+[build]
+command = "npm run build"
+
+[build.upload]
+format = "modules"
+main = "worker.mjs"
+
+# Do KV like this
+# [[kv_namespaces]]
+# binding = "COOLSTUFF"
+# id = "ID"
+# preview_id = "ID"

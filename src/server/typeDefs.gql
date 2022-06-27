@@ -1,0 +1,4 @@
+type Query {
+  # say hello to someone
+  hello(name: String = "World"): String
+}
