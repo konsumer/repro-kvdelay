@@ -45,6 +45,7 @@
     "@mantine/core": "^4.2.10",
     "@mantine/hooks": "^4.2.10",
     "@tabler/icons": "^1.71.0",
+    "@urql/exchange-graphcache": "^4.4.3",
     "graphql": "^16.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
