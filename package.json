@@ -1,5 +1,5 @@
 {
-  "name": "template-vite-cf",
+  "name": "repro-kvdelay",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^1.3.2",
     "chokidar": "^3.5.3",
+    "cross-cf": "^0.0.8",
     "cross-fetch": "^3.1.5",
     "esbuild": "^0.14.47",
     "esbuild-node-builtins": "^0.1.0",

@@ -1,4 +1,24 @@
 type Query {
   # say hello to someone
-  hello(name: String = "World"): String
+  list: [Info]
+}
+
+type Mutation {
+  add: Info
+}
+
+type Info {
+  id: ID!
+  items: [Item]
+}
+
+type Item {
+  id: String
+  name: Names
+}
+
+type Names {
+  english: String
+  japanese: String
+  chinese: String
 }

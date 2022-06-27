@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare (main)
+name: Deploy to Cloudflare
 
 on:
   push:
@@ -12,19 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      # this enables private @gummicube npm packages
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          always-auth: true
-          registry-url: https://npm.pkg.github.com/
-          scope: '@gummicube'
-      
       # use NODE_AUTH_TOKEN from above, so you can install private packages
       - name: Install Dependencies
         run: npm ci --legacy-peer-deps
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - name: Publish to Cloudflare
         uses: cloudflare/wrangler-action@2.0.0

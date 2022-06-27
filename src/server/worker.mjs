@@ -12,9 +12,9 @@ const assetManifest = JSON.parse(manifestJSON)
 
 // preload a graphql client (so we can hit or own graphql)
 function getGraphql (env, request) {
-  const g = !env.EXPERIMENTS
+  const g = !env.POKEMON
     ? {
-        // SOMEKV: globalThis.SOMEKV,
+        POKEMON: globalThis.POKEMON
       }
     : {}
   return getClient({ ...g, ...env, request })

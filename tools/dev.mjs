@@ -3,12 +3,13 @@
 import { Miniflare } from 'miniflare'
 import fetch from 'cross-fetch'
 import chokidar from 'chokidar'
+import { CrossKV } from 'cross-cf'
 
 global.fetch = fetch
 
 // you can add local KV & remote DO here with cross-cf or any other globals you like
 const globals = {
-  // SOMEKV: new CrossKV('SOMEKV')
+  POKEMON: new CrossKV('POKEMON')
 }
 
 let mf

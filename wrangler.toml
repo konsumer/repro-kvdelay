@@ -1,5 +1,5 @@
-name = "template-vite-cf"
-account_id = "cd9c418c2f482d1d4b6616d040bd48e5"
+name = "repro-kvdelay"
+account_id = "3ed2457d27afff741ff0aef6c76365fa"
 type = "javascript"
 workers_dev = true
 compatibility_date = "2022-04-15"
@@ -13,6 +13,10 @@ command = "npm run build"
 [build.upload]
 format = "modules"
 main = "worker.mjs"
+
+[[kv_namespaces]]
+binding = "POKEMON"
+id = "8932a3cf9d2e49df84d6c2b330c1bf7a"
 
 # Do KV like this
 # [[kv_namespaces]]
