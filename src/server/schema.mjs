@@ -8,7 +8,8 @@ export const resolvers = {
   Query: {
     async list (_, a, { POKEMON }) {
       const { keys } = await POKEMON.list()
-      return Promise.all(keys.map(({ name }) => POKEMON.get(name, { type: 'json' })))
+      // use string return type and parse the json ourselvess
+      return (await Promise.all(keys.map(({ name }) => POKEMON.get(name)))).map(j => JSON.parse(j))
     }
   },
 
