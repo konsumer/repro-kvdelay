@@ -1,55 +1,70 @@
-import { Box, Title } from '@mantine/core'
+import { useState } from 'react'
+import { Box, Title, Button } from '@mantine/core'
 
 import Page from '~/c/Page.jsx'
-import { Query } from '~/c/graphql.jsx'
+import { Query, graphql } from '~/c/graphql.jsx'
 
-const HELLO = `
-query HELLO ($name: String!) {
-  hello(name: $name)
+const LIST = `
+query LIST {
+  list {
+    id
+    items {
+      id
+      name {
+        english
+        japanese
+        chinese
+      }
+    }
+  }
 }
 `
 
-function ShowResults ({ data }) {
+const ADD_ONE = `
+mutation ADD_ONE {
+  add {
+    id
+    items {
+      id
+      name {
+        english
+        japanese
+        chinese
+      }
+    }
+  }
+}
+`
+
+function ShowResults ({ data: { list } }) {
   return (
-    <pre>{JSON.stringify(data, null, 2)}</pre>
+    <div>
+      <div>{list.length} records</div>
+      {list.map(item => (<div key={item.id}>{item.id}</div>))}
+    </div>
   )
 }
 
 export default function () {
+  const [redraw, setRedraw] = useState({ id: 'none' })
+
+  const add = async () => {
+    setRedraw((await graphql(ADD_ONE)).add)
+  }
+
   return (
     <Page>
       <Box>
-        <Title order={3}>Happy Path</Title>
-        Here is an example of it working:
-        <Query query={HELLO} variables={{ name: 'Cool Person' }}>
-          <ShowResults />
-        </Query>
-      </Box>
-
-      <Box mt='md'>
-        <Title order={3}>Inline (no component)</Title>
-        You can also do it inline, if you prefer that:
-        <Query query={HELLO} variables={{ name: 'Fam' }}>
-          {data => (
-            <div>The server said: {data.hello}</div>
-          )}
-        </Query>
-      </Box>
-
-      <Box mt='md'>
-        <Title order={3}>Error</Title>
-        Here I leave out the required name to trigger an error:
-        <Query query={HELLO}>
-          <ShowResults />
-        </Query>
-      </Box>
-
-      <Box mt='md'>
-        <Title order={3}>Error with dev-info</Title>
-        Here I leave out the required name to trigger an error, and set showErrors to show the actual errors:
-        <Query query={HELLO} showErrors>
-          <ShowResults />
-        </Query>
+        <Title order={3}>Pokemon Item lists</Title>
+        Here is a list of the ids of things you added
+        <Button onClick={add}>Add One</Button>
+        <div>
+          <Query key={redraw.id} query={LIST}>
+            <ShowResults />
+          </Query>
+        </div>
+        <Title order={3}>Last Add</Title>
+        <pre>{JSON.stringify(redraw, null, 2)}</pre>
       </Box>
     </Page>
   )
